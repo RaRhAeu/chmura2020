@@ -1,23 +1,36 @@
 version: "3.7"
 services:
+  postgres:
+    container_name: full2020-87726
+    image: postgres
+    ports:
+      - "5432:5432"
+    env_file:
+      - ./db_setup.env
+    networks:
+      bridge-zadanie-1:
+        ipv4_address: "10.0.10.3"
   api:
+    build:
+      context: .
+      dockerfile: ./service/Dockerfile
     image: rarhaeu/chmura2020:latest
     container_name: rest-api
     restart: always
+    env_file:
+      - ./db_setup.env
+    depends_on:
+      - postgres
     networks:
       bridge-zadanie-1:
     ports:
-    - "5000:5000"
-  mysql:
-    image: mysql/mysql-server:8.0
-    container_name: full2020-87726
-    restart: unless-stopped
-    networks:
-      bridge-zadanie-1:
-        - ipv4_address: 10.0.10.3
-    ports:
-    - "3306:3306"
+    - "8000:8000"
+    command: python manage.py runserver 0.0.0.0:8000
+
 
 networks:
   bridge-zadanie-1:
-    external: true
+
+    ipam:
+      config:
+        - subnet: "10.0.10.0/24"

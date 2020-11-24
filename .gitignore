@@ -1,6 +1,5 @@
 venv
 __pychache__
 *.pyc
-*.env
 *secrets*
 .idea

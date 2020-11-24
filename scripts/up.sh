@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker-compose -f ./docker-compose.yaml up --remove-orphans --force-recreate
+docker-compose -f ./docker-compose.yaml up -d --remove-orphans --force-recreate

@@ -4,13 +4,12 @@
 
 `$ docker-compose up`
 
-`$ ./scripts/migrate`
-
 then visit:
 
 `http://localhost:8080/api/products`
 
 # product json schema:
+
 ```json
 {
   "name": "string",
